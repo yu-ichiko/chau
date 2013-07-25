@@ -6,16 +6,16 @@ colorful diffs for MongoDB's JSON
 before.json
 ```json
 {
-  "foo": foo,
-  "bar": bar
+  "foo": "foo",
+  "bar": "bar"
 }
 ```
 
 after.json
 ```json
 {
-  "foo": foo2,
-  "bar": bar2
+  "foo": "foo2",
+  "bar": "bar2"
 }
 ```
 
