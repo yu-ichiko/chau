@@ -1,11 +1,12 @@
 {
   "name": "chau",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "colorful diffs for MongoDB's JSON",
   "main": "index.js",
   "scripts": {
     "test": "mocha test"
   },
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/yukidarake/chau"
@@ -15,17 +16,19 @@
     "MongoDB",
     "JSON"
   ],
-  "author": "Toshiyuki Nakamura",
+  "author": ["Toshiyuki Nakamura", "Yuta Ichikawa"],
   "license": "MIT",
   "dependencies": {
     "deep-equal": "0.0.0",
     "difflet": "~0.2.3",
     "request": "~2.12.0",
-    "async": "~0.1.22"
+    "async": "~0.1.22",
+    "optimist": "~0.6.0"
   },
   "devDependencies": {
     "should": "~1.2.1",
     "mocha": "~1.7.4"
   },
-  "bin": "./bin/chau"
+  "bin": "./bin/chau",
+  "engines": { "node" : ">=0.8.0" }
 }

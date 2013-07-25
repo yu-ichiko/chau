@@ -4,10 +4,16 @@ var async = require('async');
 var difflet = require('difflet');
 var deepEqual = require('deep-equal');
 var request = require('request');
+var argv = require('optimit').argv;
 
-if (process.argv.length < 4) {
-    console.log('usage: chau a.json b.json');
-    console.log('   or: chau http://example.com/a.json http://example.com/b.json');
+var before = argv.b;
+var after = argv.a;
+var filters = argv._ || [];
+
+if (!before || !after) {
+    console.log('usage: chau -b a.json -a b.json');
+    console.log('   or: chau -b http://example.com/a.json -a http://example.com/b.json');
+    console.log('   or: chau -b a.json -a b.json foo');
     process.exit(1);
 }
 
@@ -34,6 +40,16 @@ var parse = function(data) {
     }
 };
 
+var filter = function(data) {
+    var json = JSON.stringify(data, function(key, value) {
+        if (filters.indexOf(key) > -1) {
+            return undefined;
+        }
+        return value;
+    });
+    return JSON.parse(json);
+};
+
 var read = function(path, callback) {
     if (/^http/.test(path)) {
         request(path, function(err, res, body) {
@@ -51,7 +67,7 @@ var read = function(path, callback) {
             throw err;
         }
 
-        callback(null, parse(data));
+        callback(null, filter(parse(data)));
     });
 };
 
@@ -63,11 +79,11 @@ var diff = difflet({
 
 async.parallel({
     prev: function(next) {
-        read(process.argv[2], next);
+        read(before, next);
     },
     next: function(next) {
-        read(process.argv[3], next);
-    },
+        read(after, next);
+    }
 }, function(err, data) {
     var prev = data.prev;
     var next = data.next;
