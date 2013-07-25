@@ -4,7 +4,7 @@ var async = require('async');
 var difflet = require('difflet');
 var deepEqual = require('deep-equal');
 var request = require('request');
-var argv = require('optimit').argv;
+var argv = require('optimist').argv;
 
 var before = argv.b;
 var after = argv.a;
