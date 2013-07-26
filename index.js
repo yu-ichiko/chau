@@ -57,7 +57,7 @@ var read = function(path, callback) {
                 throw err;
             }
 
-            callback(null, parse(body));
+            callback(null, filter(parse(body)));
         });
         return;
     }
