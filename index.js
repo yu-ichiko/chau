@@ -12,7 +12,7 @@ var filters = argv._ || [];
 
 if (!before || !after) {
     console.log('usage: chau -b a.json -a b.json');
-    console.log('   or: chau -b http://example.com/a.json -a http://example.com/b.json');
+    console.log('   or: chau -b http://example.com/a.json -a http://example.com/b.json foo');
     console.log('   or: chau -b a.json -a b.json foo');
     process.exit(1);
 }
